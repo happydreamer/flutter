@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 void main() => runApp(MyApp());
 
-//MyApp不需要做状态处理，所以此组件继承StatelessWidget即可
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //此组件是整个应用的主组件
-    return new MaterialApp(
-      title: 'http请求示例',
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: new Text('http请求示例'),
+    return MaterialApp(
+      title: '容器组件示例',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('容器组件示例'),
         ),
-        body: new Center(
-          child: new RaisedButton(
-            onPressed: () {
-              //指定url并发起请求
-              const url = 'https://httpbin.org/';
-              //向https://httpbin.org/发起get请求
-              http.get(url).then((response) {
-                print("状态: ${response.statusCode}");
-                print("正文：${response.body}");
-              });
-            },
-            child: new Text('发起http请求'),
+        body: Center(
+          //添加容器
+          child: Container(
+            width: 200.0,
+            height: 200.0,
+            //添加边框装饰效果
+            decoration: BoxDecoration(
+              color: Colors.red,
+              //设置上下左右四个边框
+              border: new Border.all(
+                color: Colors.grey, //边框颜色
+                width: 8.0, //边框粗细
+              ),
+              borderRadius:
+                  const BorderRadius.all(const Radius.circular(8.0)), //边框的幅度
+            ),
+            child: Text('Flutter',
+                textAlign: TextAlign.center, style: TextStyle(fontSize: 28.0)),
           ),
         ),
       ),
