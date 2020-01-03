@@ -5,83 +5,62 @@ void main() => runApp(new MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final title = '基础列表示例';
+    final title = '水平列表示例';
     return MaterialApp(
       title: title,
-      home: new Scaffold(
+      home: Scaffold(
         appBar: new AppBar(
-          title: new Text(title),
+          title: Text(title),
         ),
-        body: new ListView(
-          //添加静态数据
-          children: <Widget>[
-            ListTile(
-              //添加图标
-              leading: Icon(Icons.alarm),
-              //添加文本
-              title: Text('Alarm'),
-            ),
-            ListTile(
-              //添加图标
-              leading: Icon(Icons.phone),
-              //添加文本
-              title: Text('phone'),
-            ),
-            ListTile(
-              //添加图标
-              leading: Icon(Icons.airplay),
-              //添加文本
-              title: Text('airplay'),
-            ),
-            ListTile(
-              //添加图标
-              leading: Icon(Icons.alarm),
-              //添加文本
-              title: Text('Alarm'),
-            ),
-            ListTile(
-              //添加图标
-              leading: Icon(Icons.alarm),
-              //添加文本
-              title: Text('Alarm'),
-            ),
-            ListTile(
-              //添加图标
-              leading: Icon(Icons.alarm),
-              //添加文本
-              title: Text('Alarm'),
-            ),
-            ListTile(
-              //添加图标
-              leading: Icon(Icons.alarm),
-              //添加文本
-              title: Text('Alarm'),
-            ),
-            ListTile(
-              //添加图标
-              leading: Icon(Icons.alarm),
-              //添加文本
-              title: Text('Alarm'),
-            ),
-            ListTile(
-              //添加图标
-              leading: Icon(Icons.alarm),
-              //添加文本
-              title: Text('Alarm'),
-            ),
-            ListTile(
-              //添加图标
-              leading: Icon(Icons.alarm),
-              //添加文本
-              title: Text('Alarm'),
-            ),
-            ListTile(
-              //添加图标
-              leading: Icon(Icons.alarm),
-              //添加文本
-              title: Text('Alarm'),
-            ),
-          ],
+        body: Container(
+          margin: EdgeInsets.symmetric(vertical: 20.0),
+          height: 200.0,
+          child: ListView(
+            //设置水平反向排列
+            scrollDirection: Axis.horizontal,
+            //添加子元素
+            children: <Widget>[
+              Container(
+                width: 160.0,
+                color: Colors.lightBlue,
+              ),
+              Container(
+                width: 160.0,
+                color: Colors.green,
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      '水平',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 36.0,
+                      ),
+                    ),
+                    Text(
+                      '列表',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 36.0,
+                      ),
+                    ),
+                    Icon(Icons.list)
+                  ],
+                ),
+              ),
+              Container(
+                width: 160.0,
+                color: Colors.deepPurpleAccent,
+              ),
+              Container(
+                width: 160.0,
+                color: Colors.black,
+              ),
+              Container(
+                width: 160.0,
+                color: Colors.pinkAccent,
+              ),
+            ],
+          ),
         ),
       ),
     );
