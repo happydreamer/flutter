@@ -1,36 +1,93 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(new LoginPage());
 
-class MyApp extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => new _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  // 全局key用来获取Form表单组件
+  GlobalKey<FormState> loginKey = new GlobalKey<FormState>();
+  // 用户名
+  String userName;
+  //密码
+  String password;
+  //验证码
+  String validateCode;
+
+  void login() {
+    //读取当前的Form状态
+    var loginForm = loginKey.currentState;
+    //验证表单
+    if (loginForm.validate()) {
+      loginForm.save();
+      print('这是我的用户名密码');
+      print('userName:' + userName + 'password:' + password);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final title = '网格列表示例';
-
     return new MaterialApp(
-      title: title,
+      title: 'Form表单',
       home: new Scaffold(
         appBar: new AppBar(
-          title: new Text(title),
-        ), //使用GridView.count构建网络
-        body: new GridView.count(
-          primary: false,
-          //四周增加一定的空隙
-          padding: const EdgeInsets.all(20.0),
-          //一行上放3列数据
-          crossAxisSpacing: 30.0,
-          crossAxisCount: 3,
-          //数据项，5行3列
+          title: new Text('Form表单示例'),
+        ),
+        body: new Column(
           children: <Widget>[
-            const Text('第一行第一列'),
-            const Text('第一行第二列'),
-            const Text('第一行第三列'),
-            const Text('第二行第一列'),
-            const Text('第二行第二列'),
-            const Text('第二行第三列'),
-            const Text('第三行第一列'),
-            const Text('第三行第二列'),
-            const Text('第三行第三列'),
+            new Container(
+              padding: const EdgeInsets.all(10.0),
+              child: new Form(
+                key: loginKey,
+                child: new Column(
+                  children: <Widget>[
+                    new TextFormField(
+                      decoration: new InputDecoration(
+                        labelText: '请输入用户名',
+                      ),
+                      onSaved: (value) => {
+                        userName = value,
+                      },
+                      onFieldSubmitted: (value) => {},
+                    ),
+                    new TextFormField(
+                      decoration: new InputDecoration(
+                        labelText: '请输入密码',
+                      ),
+                      obscureText: true,
+                      //验证表单方法
+                      validator: (value) {
+                        return value.length < 6 ? '密码长度不够6位' : null;
+                      },
+                      onSaved: (value) {
+                        password = value;
+                      },
+                    ),
+                    new TextFormField(
+                      decoration: new InputDecoration(
+                        labelText: '请输入验证码',
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            new SizedBox(
+              width: 140.0,
+              height: 42.0,
+              child: new RaisedButton(
+                onPressed: login,
+                child: new Text(
+                  '登录',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
