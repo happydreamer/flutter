@@ -1,51 +1,49 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(
-      new MaterialApp(
-        title: 'drawer实例',
-        home: new LayoutDemo(),
-      ),
-    );
+void main() => runApp(new MyApp());
 
-class LayoutDemo extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: Text('抽屉组件'),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            //设置用户信息头像用户名邮箱等
-            UserAccountsDrawerHeader(
-              accountName: new Text('亭亭'),
-              accountEmail: new Text('1826265107@qq.com'),
-              //设置当前用户头像
-              currentAccountPicture: new CircleAvatar(
-                backgroundImage: new AssetImage('images/2.0x/6.jpg'),
-              ),
-              onDetailsPressed: () {},
-              otherAccountsPictures: <Widget>[
-                new Container(
-                  child: Image.asset('images/2.0x/7.jpg'),
-                ),
-              ],
-            ),
-            ListTile(
-              leading: new CircleAvatar(child: Icon(Icons.color_lens)), //导航栏菜单
-              title: Text('个性装扮'),
-            ),
-            ListTile(
-              leading: new CircleAvatar(child: Icon(Icons.photo)),
-              title: Text('我的相册'),
-            ),
-            ListTile(
-              leading: new CircleAvatar(child: Icon(Icons.wifi)),
-              title: Text('免流浪特权'),
-            ),
-          ],
+    return MaterialApp(
+      title: 'FloattingActionButton示例',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('FloattingActionButton示例'),
         ),
+        body: Center(
+          child: Text(
+            'FloattingActionButton示例',
+            style: TextStyle(fontSize: 28.0),
+          ),
+        ),
+        floatingActionButton: new Builder(builder: (BuildContext context) {
+          return new FloatingActionButton(
+            child: const Icon(Icons.add),
+            //提示信息
+            tooltip: '请点击FloatingActionButton',
+            //前背景颜色为白色
+            foregroundColor: Colors.white,
+            //背景颜色为蓝色
+            backgroundColor: Colors.blue,
+            //未点击阴影值
+            elevation: 7.0,
+            //点击阴影值
+            highlightElevation: 14.0,
+            onPressed: () {
+              //点击回调事件，弹出提示语
+              Scaffold.of(context).showSnackBar(new SnackBar(
+                content: new Text('你点击了FloatingActionButton'),
+              ));
+            },
+            mini: false,
+            //圆形边
+            shape: new CircleBorder(),
+            isExtended: false,
+          );
+        }),
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation.centerDocked, //居中放置
       ),
     );
   }
