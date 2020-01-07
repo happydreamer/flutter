@@ -1,83 +1,52 @@
 import 'package:flutter/material.dart';
 
-class TabBarSample extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      //添加DefaultTabController 关联TabBar 以及TabBarView
-      home: new DefaultTabController(
-        length: items.length, // 选项卡数量
-        child: new Scaffold(
-          appBar: new AppBar(
-            title: const Text('Tab选项卡实例'),
-            bottom: new TabBar(
-              isScrollable: true, //设置为可以滚动
-              tabs: items.map((ItemView item) {
-                // 迭代添加选项卡子项
-                return new Tab(
-                  text: item.title,
-                  icon: new Icon(item.icon),
-                );
-              }).toList(),
-            ),
-          ),
-          // 添加选项卡视图
-          body: new TabBarView(
-            children: items.map((ItemView item) {
-              //迭代显示选项卡视图
-              return new Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: new SelectedView(item: item),
-              );
-            }).toList(),
-          ),
-        ),
+void main() => runApp(
+      new MaterialApp(
+        title: 'drawer实例',
+        home: new LayoutDemo(),
       ),
     );
-  }
-}
 
-//视图项数据
-class ItemView {
-  const ItemView({this.title, this.icon}); // 构造方法
-  final String title;
-  final IconData icon;
-}
-
-//选项卡的类目
-const List<ItemView> items = const <ItemView>[
-  const ItemView(title: '自驾', icon: Icons.directions_car),
-  const ItemView(title: '自行车', icon: Icons.directions_bike),
-  const ItemView(title: '轮船', icon: Icons.directions_boat),
-  const ItemView(title: '公交车', icon: Icons.directions_bus),
-  const ItemView(title: '火车', icon: Icons.directions_railway),
-  const ItemView(title: '步行', icon: Icons.directions_walk),
-];
-
-//被选中的视图
-class SelectedView extends StatelessWidget {
-  const SelectedView({Key key, this.item}) : super(key: key);
-  //视图数据
-  final ItemView item;
+class LayoutDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final TextStyle textStyle = Theme.of(context).textTheme.display1;
-    return new Card(
-      color: Colors.white,
-      child: new Center(
-        child: new Column(
-          mainAxisSize: MainAxisSize.min, //垂直反向最小化处理
-          crossAxisAlignment: CrossAxisAlignment.center, //水平方向居中对齐
+    return new Scaffold(
+      appBar: new AppBar(
+        title: Text('抽屉组件'),
+      ),
+      drawer: Drawer(
+        child: ListView(
           children: <Widget>[
-            new Icon(item.icon, size: 128.0, color: textStyle.color),
-            new Text(item.title, style: textStyle),
+            //设置用户信息头像用户名邮箱等
+            UserAccountsDrawerHeader(
+              accountName: new Text('亭亭'),
+              accountEmail: new Text('1826265107@qq.com'),
+              //设置当前用户头像
+              currentAccountPicture: new CircleAvatar(
+                backgroundImage: new AssetImage('images/2.0x/6.jpg'),
+              ),
+              onDetailsPressed: () {},
+              otherAccountsPictures: <Widget>[
+                new Container(
+                  child: Image.asset('images/2.0x/7.jpg'),
+                ),
+              ],
+            ),
+            ListTile(
+              leading: new CircleAvatar(child: Icon(Icons.color_lens)), //导航栏菜单
+              title: Text('个性装扮'),
+            ),
+            ListTile(
+              leading: new CircleAvatar(child: Icon(Icons.photo)),
+              title: Text('我的相册'),
+            ),
+            ListTile(
+              leading: new CircleAvatar(child: Icon(Icons.wifi)),
+              title: Text('免流浪特权'),
+            ),
           ],
         ),
       ),
     );
   }
-}
-
-void main() {
-  runApp(new TabBarSample());
 }
