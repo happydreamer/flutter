@@ -1,45 +1,35 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(new MaterialApp(
-    title: 'IndexedStateStack布局示例',
-    home: new MyApp(),
-  ));
-}
-
-class MyApp extends StatelessWidget {
+class LayoutDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var stack = new IndexedStack(
-      index: 1, //设置索引值
-      alignment: const FractionalOffset(0.2, 0.2),
-      children: <Widget>[
-        new CircleAvatar(
-          backgroundImage: new AssetImage('images/2.0x/4.jpg'),
-          radius: 100.0,
-        ),
-        new Container(
-          decoration: new BoxDecoration(
-            color: Colors.black38,
-          ),
-          child: new Text(
-            '盛世美颜我姐姐',
-            style: new TextStyle(
-              fontSize: 22.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ],
-    );
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Stack层叠布局示例'),
+        title: new Text('OverFlowBox溢出父容器显示示例'),
       ),
-      body: new Center(
-        child: stack,
+      body: Container(
+        color: Colors.green,
+        width: 200.0,
+        height: 200.0,
+        padding: const EdgeInsets.all(50.0),
+        child: OverflowBox(
+          alignment: Alignment.topLeft,
+          maxHeight: 400.0,
+          maxWidth: 400.0,
+          child: Container(
+            color: Colors.blueGrey,
+            width: 300.0,
+            height: 300.0,
+          ),
+        ),
       ),
     );
   }
+}
+
+void main() {
+  runApp(new MaterialApp(
+    title: 'overflowbox',
+    home: new LayoutDemo(),
+  ));
 }
