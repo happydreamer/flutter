@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(
     new MaterialApp(
-      title: 'ROW水平布局示例',
+      title: 'FittedBox布局示例',
       home: new LayoutDemo(),
     ),
   );
@@ -14,29 +14,20 @@ class LayoutDemo extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('垂直布局示例'),
+        title: new Text('FittedBox布局示例'),
       ),
-      body: new Column(
-        // children: <Widget>[
-        //   new Text('Flutter'),
-        //   new Text('垂直布局'),
-        //   new Expanded(
-        //     child: new FittedBox(
-        //       fit: BoxFit.contain,
-        //       child: const FlutterLogo(),
-        //     ),
-        //   )
-        // ],
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          new Text('Flutter谷歌移动端开发框架'),
-          new Text('Flutter谷歌移动端开发框架'),
-          new Text('Flutter谷歌移动端开发框架'),
-          new Text('Flutter谷歌移动端开发框架'),
-          new Text('Flutter谷歌移动端开发框架'),
-          new Text('Flutter谷歌移动端开发框架'),
-        ],
+      body: new Container(
+        color: Colors.grey,
+        width: 250.0,
+        height: 250.0,
+        child: new FittedBox(
+          fit: BoxFit.contain, //改变填充属性
+          alignment: Alignment.topLeft,
+          child: new Container(
+            color: Colors.deepOrange,
+            child: new Text('缩放布局'),
+          ),
+        ),
       ),
     );
   }
