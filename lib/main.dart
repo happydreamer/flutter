@@ -1,46 +1,69 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(
-      new MaterialApp(
-        title: 'Padding填充布局示例',
-        home: new LayoutDemo(),
-      ),
-    );
-
 class LayoutDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //返回一个Container对象
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Padding填充布局示例'),
+        title: new Text('Align对齐布局示例'),
       ),
-      body: new Center(
-        child: new Container(
-          width: 300.0,
-          height: 300.0,
-          padding: EdgeInsets.all(60.0),
-          decoration: new BoxDecoration(
-            color: Colors.white,
-            border: new Border.all(
-              color: Colors.green,
-              width: 8.0,
+      body: new Stack(
+        children: <Widget>[
+          //左上角
+          new Align(
+            alignment: new FractionalOffset(0.0, 0.0),
+            child: new Image.asset(
+              'images/2.0x/1.jpg',
+              width: 100.0,
+              height: 100.0,
             ),
           ),
-          child: new Container(
-            width: 200.0,
-            height: 200.0,
-            decoration: new BoxDecoration(
-              color: Colors.white,
-              border: new Border.all(
-                color: Colors.blue,
-                width: 8.0,
-              ),
+          //右上角
+          new Align(
+            alignment: FractionalOffset(1.0, 0.0),
+            child: new Image.asset(
+              'images/2.0x/2.jpg',
+              width: 100.0,
+              height: 100.0,
             ),
-            child: new FlutterLogo(),
           ),
-        ),
+          //水平垂直反向居中
+          new Align(
+            alignment: FractionalOffset.center,
+            child: new Image.asset(
+              'images/2.0x/4.jpg',
+              width: 100.0,
+              height: 100.0,
+            ),
+          ),
+          new Align(
+            alignment: FractionalOffset.bottomLeft,
+            child: new Image.asset(
+              'images/2.0x/5.jpg',
+              width: 100.0,
+              height: 100.0,
+            ),
+          ),
+          //右下角
+          new Align(
+            alignment: FractionalOffset.bottomRight,
+            child: new Image.asset(
+              'images/2.0x/6.jpg',
+              width: 100.0,
+              height: 100.0,
+            ),
+          ),
+        ],
       ),
     );
   }
+}
+
+void main() {
+  runApp(
+    new MaterialApp(
+      title: 'Align对齐方式显示',
+      home: new LayoutDemo(),
+    ),
+  );
 }
