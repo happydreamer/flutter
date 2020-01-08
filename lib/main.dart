@@ -5,22 +5,19 @@ class LayoutDemo extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('LimitedBox限定宽高示例'),
+        title: new Text('FractionallySizedBox百分比布局示例'),
       ),
-      body: Row(
-        children: <Widget>[
-          Container(
-            color: Colors.grey,
-            width: 100.0,
+      body: new Container(
+        height: 200.0,
+        width: 200.0,
+        child: new FractionallySizedBox(
+          alignment: Alignment.topLeft, //元素作上角对齐
+          widthFactor: 0.5, //宽度因子
+          heightFactor: 1.5, //高度因子
+          child: new Container(
+            color: Colors.green,
           ),
-          LimitedBox(
-            maxWidth: 150.0,
-            child: Container(
-              color: Colors.lightBlue,
-              width: 250.0,
-            ),
-          )
-        ],
+        ),
       ),
     );
   }
@@ -28,7 +25,7 @@ class LayoutDemo extends StatelessWidget {
 
 void main() {
   runApp(new MaterialApp(
-    title: 'LimitedBox限定宽高示例',
+    title: 'FractionallySizedBox百分比布局示例',
     home: new LayoutDemo(),
   ));
 }
