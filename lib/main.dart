@@ -3,20 +3,71 @@ import 'package:flutter/material.dart';
 class LayoutDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    List<Widget> list = <Widget>[
+      new ListTile(
+        title: new Text(
+          '河南省周口市西华县',
+          style: new TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 18.0,
+          ),
+        ),
+        subtitle: new Text('是颖宝呀'),
+        leading: new Icon(
+          Icons.fastfood,
+          color: Colors.orange,
+        ),
+      ),
+      new ListTile(
+        title: new Text(
+          '以后少说话，不要轻易插嘴好不好',
+          style: new TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 18.0,
+          ),
+        ),
+        subtitle: new Text('是盛世美颜我姐姐'),
+        leading: new Icon(
+          Icons.airplay,
+          color: Colors.blue,
+        ),
+      ),
+      new ListTile(
+        title: new Text(
+          '你的眼里有日月星辰',
+          style: new TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 18.0,
+          ),
+        ),
+        subtitle: new Text('是我的楚乔大大'),
+        leading: new Icon(
+          Icons.local_hospital,
+          color: Colors.green,
+        ),
+      ),
+      new ListTile(
+        title: new Text(
+          '你的眼里有日月星辰',
+          style: new TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 18.0,
+          ),
+        ),
+        subtitle: new Text('是我的楚乔大大'),
+        leading: new Icon(
+          Icons.computer,
+          color: Colors.deepPurple,
+        ),
+      ),
+    ];
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('FractionallySizedBox百分比布局示例'),
+        title: new Text('ListView布局示例'),
       ),
-      body: new Container(
-        height: 200.0,
-        width: 200.0,
-        child: new FractionallySizedBox(
-          alignment: Alignment.topLeft, //元素作上角对齐
-          widthFactor: 0.5, //宽度因子
-          heightFactor: 1.5, //高度因子
-          child: new Container(
-            color: Colors.green,
-          ),
+      body: new Center(
+        child: new ListView(
+          children: list,
         ),
       ),
     );
@@ -25,7 +76,7 @@ class LayoutDemo extends StatelessWidget {
 
 void main() {
   runApp(new MaterialApp(
-    title: 'FractionallySizedBox百分比布局示例',
+    title: '列表以及表格布局ListView',
     home: new LayoutDemo(),
   ));
 }
