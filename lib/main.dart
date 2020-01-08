@@ -14,22 +14,28 @@ class LayoutDemo extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('ROW水平布局示例'),
+        title: new Text('垂直布局示例'),
       ),
-      body: new Row(
+      body: new Column(
+        // children: <Widget>[
+        //   new Text('Flutter'),
+        //   new Text('垂直布局'),
+        //   new Expanded(
+        //     child: new FittedBox(
+        //       fit: BoxFit.contain,
+        //       child: const FlutterLogo(),
+        //     ),
+        //   )
+        // ],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          new Expanded(
-            child: new Text('左侧文本', textAlign: TextAlign.center),
-          ),
-          new Expanded(
-            child: new Text('中间文本', textAlign: TextAlign.center),
-          ),
-          new Expanded(
-            child: new FittedBox(
-              fit: BoxFit.contain,
-              child: const FlutterLogo(),
-            ),
-          )
+          new Text('Flutter谷歌移动端开发框架'),
+          new Text('Flutter谷歌移动端开发框架'),
+          new Text('Flutter谷歌移动端开发框架'),
+          new Text('Flutter谷歌移动端开发框架'),
+          new Text('Flutter谷歌移动端开发框架'),
+          new Text('Flutter谷歌移动端开发框架'),
         ],
       ),
     );
