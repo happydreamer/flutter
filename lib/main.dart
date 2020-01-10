@@ -1,56 +1,73 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(new MyApp());
+  runApp(new MaterialApp(
+    title: 'Wrap按照宽高自动换行布局示例',
+    home: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final appTitle = 'offstage控制是否显示组件示例';
-    return new MaterialApp(
-      title: appTitle,
-      home: new MyHomePage(title: appTitle),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  final String title;
-  MyHomePage({Key key, this.title}) : super(key: key);
-  @override
-  _MyHomePageState createState() => new _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  //状态控制是否显示文本组件
-  bool offstage = true;
-  @override
-  Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text(widget.title),
+        title: new Text('Wrap按照宽高自动换行布局示例'),
       ),
-      body: Center(
-        child: new Offstage(
-          offstage: offstage,
-          child: new Text(
-            '我可以显示啦!',
-            style: TextStyle(
-              fontSize: 36.0,
+      body: Wrap(
+        spacing: 8.0,
+        runSpacing: 4.0, //行之间的间隙大小
+        children: <Widget>[
+          Chip(
+            //添加图形头像
+            avatar: CircleAvatar(
+              backgroundColor: Colors.lightGreen.shade800,
+              child: new Text(
+                '西门',
+                style: TextStyle(
+                  fontSize: 10.0,
+                ),
+              ),
             ),
+            label: Text('西门吹雪'),
           ),
-        ),
-      ),
-      floatingActionButton: new FloatingActionButton(
-        onPressed: () {
-          //是否显示文本组件
-          setState(() {
-            offstage = !offstage;
-          });
-        },
-        tooltip: '显示隐藏',
-        child: new Icon(Icons.flip),
+          Chip(
+            avatar: CircleAvatar(
+              backgroundColor: Colors.lightBlue.shade700,
+              child: new Text(
+                '司空',
+                style: TextStyle(
+                  fontSize: 10.0,
+                ),
+              ),
+            ),
+            label: Text('司空摘星'),
+          ),
+          Chip(
+            avatar: CircleAvatar(
+              backgroundColor: Colors.lightBlue.shade700,
+              child: new Text(
+                '木婉',
+                style: TextStyle(
+                  fontSize: 10.0,
+                ),
+              ),
+            ),
+            label: Text('木婉清'),
+          ),
+          Chip(
+            avatar: CircleAvatar(
+              backgroundColor: Colors.lightBlue.shade700,
+              child: new Text(
+                '萧',
+                style: TextStyle(
+                  fontSize: 10.0,
+                ),
+              ),
+            ),
+            label: Text('萧十一郎'),
+          ),
+        ],
       ),
     );
   }
