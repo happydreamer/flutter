@@ -1,60 +1,57 @@
 import 'package:flutter/material.dart';
 
-class LayoutDemo extends StatelessWidget {
+void main() {
+  runApp(new MyApp());
+}
+
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('Baseline基准线布局示例'),
-      ),
-      body: new Row(
-        //水平等间距排列组件
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          //设置基准线
-          new Baseline(
-            baseline: 80.0,
-            //对齐字符底部水平线
-            baselineType: TextBaseline.alphabetic,
-            child: new Text(
-              '赵丽颖',
-              style: new TextStyle(
-                fontSize: 18.0,
-                textBaseLine: TextBaseLine.alphabetic,
-              ),
-            ),
-          ),
-          new Baseline(
-            baseline: 80.0,
-            baselineType: TextBaseline.alphabetic,
-            child: new Container(
-              width: 40.0,
-              height: 40.0,
-              color: Colors.green,
-            ),
-          ),
-          new Baseline(
-            baseline: 80.0,
-            baselineType: TextBaseline.alphabetic,
-            child: new Text(
-              '冯绍峰',
-              style: new TextStyle(
-                fontSize: 26.0,
-                textBaseLine: TextBaseLine.alphabetic,
-              ),
-            ),
-          )
-        ],
-      ),
+    final appTitle = 'offstage控制是否显示组件示例';
+    return new MaterialApp(
+      title: appTitle,
+      home: new MyHomePage(title: appTitle),
     );
   }
 }
 
-void main() {
-  runApp(
-    new MaterialApp(
-      title: 'BaseLine基准线布局示例',
-      home: new LayoutDemo(),
-    ),
-  );
+class MyHomePage extends StatefulWidget {
+  final String title;
+  MyHomePage({Key key, this.title}) : super(key: key);
+  @override
+  _MyHomePageState createState() => new _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  //状态控制是否显示文本组件
+  bool offstage = true;
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text(widget.title),
+      ),
+      body: Center(
+        child: new Offstage(
+          offstage: offstage,
+          child: new Text(
+            '我可以显示啦!',
+            style: TextStyle(
+              fontSize: 36.0,
+            ),
+          ),
+        ),
+      ),
+      floatingActionButton: new FloatingActionButton(
+        onPressed: () {
+          //是否显示文本组件
+          setState(() {
+            offstage = !offstage;
+          });
+        },
+        tooltip: '显示隐藏',
+        child: new Icon(Icons.flip),
+      ),
+    );
+  }
 }
