@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(new MaterialApp(
-    title: 'GridView九宫格布局示例',
+    title: 'Table表格布局示例',
     home: new MyApp(),
   ));
 }
@@ -10,32 +10,51 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //使用generate构造图片列表
-    List<Container> _buildGridTitleList(int count) {
-      return new List<Container>.generate(
-          count,
-          (int index) => new Container(
-                child: new Image.asset('images/2.0x/${index + 1}.jpg'),
-              ));
-    }
-
-    //渲染GridView
-    Widget buildGrid() {
-      return new GridView.extent(
-        maxCrossAxisExtent: 150.0,
-        padding: const EdgeInsets.all(4.0),
-        mainAxisSpacing: 4.0,
-        crossAxisSpacing: 4.0,
-        children: _buildGridTitleList(9),
-      );
-    }
-
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('GridView九宫格示例'),
+        title: new Text('Table表格示例'),
       ),
       body: new Center(
-        child: buildGrid(),
+        child: Table(
+          //设置表格有多少列，并指定列宽
+          columnWidths: const <int, TableColumnWidth>{
+            0: FixedColumnWidth(100.0),
+            1: FixedColumnWidth(40.0),
+            2: FixedColumnWidth(80.0),
+            3: FixedColumnWidth(80.0),
+          },
+          //设置表格边框样式
+          border: TableBorder.all(
+              color: Colors.black38, width: 2.0, style: BorderStyle.solid),
+          children: const <TableRow>[
+            //添加第一行数据
+            TableRow(
+              children: <Widget>[
+                Text('姓名'),
+                Text('性别'),
+                Text('年龄'),
+                Text('身高'),
+              ],
+            ),
+            //添加第二行数据
+            TableRow(
+              children: <Widget>[
+                Text('朱亭亭'),
+                Text('女'),
+                Text('18'),
+                Text('160'),
+              ],
+            ),
+            TableRow(
+              children: <Widget>[
+                Text('吴琪'),
+                Text('女'),
+                Text('17'),
+                Text('175'),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
