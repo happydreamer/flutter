@@ -2,45 +2,42 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(new MaterialApp(
-    title: '按下处理Demo',
+    title: '滑动删除示例',
     home: new MyApp(),
   ));
 }
 
-class MyButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    //一定要把被触摸的组件放在GestureDetector里面
-    return new GestureDetector(
-      onTap: () {
-        //底部消息提示
-        final snackBar = new SnackBar(
-          content: new Text('你已按下'),
-        );
-        Scaffold.of(context).showSnackBar(snackBar);
-      },
-      //添加容器接收触摸动作
-      child: new Container(
-        padding: new EdgeInsets.all(12.0),
-        decoration: new BoxDecoration(
-          color: Theme.of(context).buttonColor,
-          borderRadius: new BorderRadius.circular(10.0),
-        ),
-        child: new Text('测试按钮'),
-      ),
-    );
-  }
-}
-
 class MyApp extends StatelessWidget {
+  //构建30条列表数据
+  List<String> items = new List<String>.generate(30, (i) => '列表项${i + 1}');
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('按下处理Demo'),
+        title: new Text('滑动删除示例'),
       ),
-      body: new Center(
-        child: new MyButton(),
+      //构建列表
+      body: new ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          //构建列表
+          //提取出被删除的项
+          final item = items[index];
+          //返回一个可以被删除的列表项
+          return new Dismissible(
+            key: new Key(item),
+            //被删除回调
+            onDismissed: (direction) {
+              items.removeAt(index);
+              //底部弹出消息提示当前项被删除了
+              Scaffold.of(context)
+                  .showSnackBar(new SnackBar(content: new Text("$item 被删除了")));
+            },
+            child: new ListTile(
+              title: new Text('$item'),
+            ),
+          );
+        },
       ),
     );
   }
