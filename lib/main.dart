@@ -1,82 +1,47 @@
 import 'package:flutter/material.dart';
 
-class LayoutDemo extends StatelessWidget {
+void main() {
+  runApp(new MaterialApp(
+    title: '滚动布局示例',
+    home: new MyApp(),
+  ));
+}
+
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<Widget> list = <Widget>[
-      new ListTile(
-        title: new Text(
-          '河南省周口市西华县',
-          style: new TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 18.0,
-          ),
-        ),
-        subtitle: new Text('是颖宝呀'),
-        leading: new Icon(
-          Icons.fastfood,
-          color: Colors.orange,
-        ),
-      ),
-      new ListTile(
-        title: new Text(
-          '以后少说话，不要轻易插嘴好不好',
-          style: new TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 18.0,
-          ),
-        ),
-        subtitle: new Text('是盛世美颜我姐姐'),
-        leading: new Icon(
-          Icons.airplay,
-          color: Colors.blue,
-        ),
-      ),
-      new ListTile(
-        title: new Text(
-          '你的眼里有日月星辰',
-          style: new TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 18.0,
-          ),
-        ),
-        subtitle: new Text('是我的楚乔大大'),
-        leading: new Icon(
-          Icons.local_hospital,
-          color: Colors.green,
-        ),
-      ),
-      new ListTile(
-        title: new Text(
-          '你的眼里有日月星辰',
-          style: new TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 18.0,
-          ),
-        ),
-        subtitle: new Text('是我的楚乔大大'),
-        leading: new Icon(
-          Icons.computer,
-          color: Colors.deepPurple,
-        ),
-      ),
-    ];
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('ListView布局示例'),
+        title: new Text('滚动布局示例'),
       ),
-      body: new Center(
-        child: new ListView(
-          children: list,
-        ),
+      body: new ListView(
+        children: <Widget>[
+          new Center(
+            child: new Text(
+              '\n广州市天河区公园',
+              style: new TextStyle(
+                fontSize: 30.0,
+              ),
+            ),
+          ),
+          new Center(
+            child: new Text(
+              '天河公园',
+              style: new TextStyle(fontSize: 16.0),
+            ),
+          ),
+          new Center(
+            child: new Text(
+              '''
+              赵丽颖，1987年10月16日出生于河北省廊坊市，中国内地影视女演员、歌手。2006年，因获得雅虎搜星比赛冯小刚组冠军而进入演艺圈；同年，在冯小刚执导的广告片《跪族篇》中担任女主角。2011年，因在古装剧《新还珠格格》中饰演晴儿一角而被观众认识。2013年，凭借古装剧《陆贞传奇》获得更多关注。2014年10月，在第10届金鹰电视艺术节举办的投票活动中被选为“金鹰女神”；12月，凭借都市爱情剧
+              ''',
+              style: new TextStyle(
+                fontSize: 14.0,
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
-}
-
-void main() {
-  runApp(new MaterialApp(
-    title: '列表以及表格布局ListView',
-    home: new LayoutDemo(),
-  ));
 }
