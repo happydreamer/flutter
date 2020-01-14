@@ -1,63 +1,76 @@
 import 'package:flutter/material.dart';
 
-class Product {
-  final String title;
-  final String description;
-
-  Product(this.title, this.description);
-}
-
 void main() {
   runApp(new MaterialApp(
-    title: '传递数据示例',
-    home: new ProductList(
-      products: new List.generate(20, (i) => new Product('商品$i', '这是一个商品详情$i')),
-    ),
+    title: '页面返回数据示例',
+    home: new FirstPage(),
   ));
 }
 
-class ProductList extends StatelessWidget {
-  final List<Product> products;
-  ProductList({Key key, @required this.products}) : super(key: key);
+class FirstPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('商品列表'),
+        title: new Text('页面跳转返回数据示例'),
       ),
-      body: new ListView.builder(
-        itemCount: products.length,
-        itemBuilder: (content, index) {
-          return new ListTile(
-            title: new Text(products[index].title),
-            onTap: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(
-                    builder: (context) =>
-                        new ProductDetail(product: products[index])),
-              );
-            },
-          );
-        },
+      body: new Center(
+        child: new RouteButton(),
       ),
     );
   }
 }
 
-class ProductDetail extends StatelessWidget {
-  final Product product;
-  ProductDetail({Key key, @required this.product}) : super(key: key);
+class RouteButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new RaisedButton(
+      onPressed: () {
+        _navigateToSecondPage(context);
+      },
+      child: new Text('跳转到第二个页面'),
+    );
+  }
 
+  _navigateToSecondPage(BuildContext context) async {
+    final result = await Navigator.push(
+      context,
+      new MaterialPageRoute(builder: (context) => new SecondPage()),
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('${product.title}'),
+        title: new Text('选择一条数据'),
       ),
-      body: new Padding(
-        padding: new EdgeInsets.all(16.0),
-        child: new Text('${product.description}'),
+      body: new Center(
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            new Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: new RaisedButton(
+                onPressed: () {
+                  Navigator.pop(context, 'hi google');
+                },
+                child: new Text('hi google'),
+              ),
+            ),
+            new Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: new RaisedButton(
+                onPressed: () {
+                  Navigator.pop(context, 'hi flutter');
+                },
+                child: new Text('hi flutter'),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
