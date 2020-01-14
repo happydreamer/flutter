@@ -13,13 +13,21 @@ class LayoutDemo extends StatelessWidget {
           height: 300.0,
           decoration: BoxDecoration(
             color: Colors.white,
-            //添加所有的边框，处理颜色为灰色，宽度4.0
-            border: Border.all(color: Colors.grey, width: 4.0),
-            //添加边框弧度，这样会有一个圆弧效果
-            borderRadius: BorderRadius.circular(36.0),
-            image: DecorationImage(
-              image: ExactAssetImage('images/2.0x/2.jpg'),
-              fit: BoxFit.cover, //填充类型
+            //边框阴影效果
+            boxShadow: <BoxShadow>[
+              new BoxShadow(
+                color: Colors.grey, //阴影颜色
+                blurRadius: 8.0, //模糊值
+                spreadRadius: 8.0, //扩展阴影半径
+                offset: Offset(-1.0, 1.0),
+              ),
+            ],
+          ),
+          child: Text(
+            'BoxShow引用效果',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 28.0,
             ),
           ),
         ),
@@ -30,7 +38,7 @@ class LayoutDemo extends StatelessWidget {
 
 void main() {
   runApp(new MaterialApp(
-    title: 'BoxDecoration装饰盒子背景图示例',
+    title: 'BoxDecoration---边框阴影示例',
     home: new LayoutDemo(),
   ));
 }
