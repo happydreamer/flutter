@@ -1,77 +1,36 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(new MaterialApp(
-    title: '页面返回数据示例',
-    home: new FirstPage(),
-  ));
-}
-
-class FirstPage extends StatelessWidget {
+class LayoutDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('页面跳转返回数据示例'),
+        title: new Text('BoxDecoration装饰盒子背景图示例'),
       ),
       body: new Center(
-        child: new RouteButton(),
-      ),
-    );
-  }
-}
-
-class RouteButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new RaisedButton(
-      onPressed: () {
-        _navigateToSecondPage(context);
-      },
-      child: new Text('跳转到第二个页面'),
-    );
-  }
-
-  _navigateToSecondPage(BuildContext context) async {
-    final result = await Navigator.push(
-      context,
-      new MaterialPageRoute(builder: (context) => new SecondPage()),
-    );
-  }
-}
-
-class SecondPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('选择一条数据'),
-      ),
-      body: new Center(
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: new RaisedButton(
-                onPressed: () {
-                  Navigator.pop(context, 'hi google');
-                },
-                child: new Text('hi google'),
-              ),
+        child: Container(
+          width: 300.0,
+          height: 300.0,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            //添加所有的边框，处理颜色为灰色，宽度4.0
+            border: Border.all(color: Colors.grey, width: 4.0),
+            //添加边框弧度，这样会有一个圆弧效果
+            borderRadius: BorderRadius.circular(36.0),
+            image: DecorationImage(
+              image: ExactAssetImage('images/2.0x/2.jpg'),
+              fit: BoxFit.cover, //填充类型
             ),
-            new Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: new RaisedButton(
-                onPressed: () {
-                  Navigator.pop(context, 'hi flutter');
-                },
-                child: new Text('hi flutter'),
-              ),
-            )
-          ],
+          ),
         ),
       ),
     );
   }
+}
+
+void main() {
+  runApp(new MaterialApp(
+    title: 'BoxDecoration装饰盒子背景图示例',
+    home: new LayoutDemo(),
+  ));
 }
