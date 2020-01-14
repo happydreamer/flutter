@@ -5,29 +5,34 @@ class LayoutDemo extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('BoxDecoration装饰盒子背景图示例'),
+        title: new Text('LinearGradient线性渐变效果'),
       ),
       body: new Center(
-        child: Container(
-          width: 300.0,
-          height: 300.0,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            //边框阴影效果
-            boxShadow: <BoxShadow>[
-              new BoxShadow(
-                color: Colors.grey, //阴影颜色
-                blurRadius: 8.0, //模糊值
-                spreadRadius: 8.0, //扩展阴影半径
-                offset: Offset(-1.0, 1.0),
-              ),
-            ],
+        child: new DecoratedBox(
+          decoration: new BoxDecoration(
+            gradient: new LinearGradient(
+              begin: const FractionalOffset(0.5, 0.0), //起始偏移量
+              end: const FractionalOffset(1.0, 1.0), //终止偏移量
+              //渐变颜色数据集
+              colors: <Color>[
+                Colors.red,
+                Colors.green,
+                Colors.blue,
+                Colors.grey,
+              ],
+            ),
           ),
-          child: Text(
-            'BoxShow引用效果',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 28.0,
+          child: new Container(
+            width: 280.0,
+            height: 280.0,
+            child: new Center(
+              child: Text(
+                'LinearGradient线性渐变效果',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 28.0,
+                ),
+              ),
             ),
           ),
         ),
@@ -38,7 +43,7 @@ class LayoutDemo extends StatelessWidget {
 
 void main() {
   runApp(new MaterialApp(
-    title: 'BoxDecoration---边框阴影示例',
+    title: 'LinearGradient线性渐变效果',
     home: new LayoutDemo(),
   ));
 }
