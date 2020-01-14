@@ -1,48 +1,63 @@
 import 'package:flutter/material.dart';
 
+class Product {
+  final String title;
+  final String description;
+
+  Product(this.title, this.description);
+}
+
 void main() {
   runApp(new MaterialApp(
-    title: '导航页面示例',
-    home: new FirstScreen(),
+    title: '传递数据示例',
+    home: new ProductList(
+      products: new List.generate(20, (i) => new Product('商品$i', '这是一个商品详情$i')),
+    ),
   ));
 }
 
-class FirstScreen extends StatelessWidget {
+class ProductList extends StatelessWidget {
+  final List<Product> products;
+  ProductList({Key key, @required this.products}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('导航页面示例'),
+        title: new Text('商品列表'),
       ),
-      body: new Center(
-        child: new RaisedButton(
-          child: new Text('查看商品详情页面'),
-          onPressed: () {
-            Navigator.push(
+      body: new ListView.builder(
+        itemCount: products.length,
+        itemBuilder: (content, index) {
+          return new ListTile(
+            title: new Text(products[index].title),
+            onTap: () {
+              Navigator.push(
                 context,
                 new MaterialPageRoute(
-                    builder: (context) => new SecondScreen()));
-          },
-        ),
+                    builder: (context) =>
+                        new ProductDetail(product: products[index])),
+              );
+            },
+          );
+        },
       ),
     );
   }
 }
 
-class SecondScreen extends StatelessWidget {
+class ProductDetail extends StatelessWidget {
+  final Product product;
+  ProductDetail({Key key, @required this.product}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('导航页面示例'),
+        title: new Text('${product.title}'),
       ),
-      body: new Center(
-        child: new RaisedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: new Text('返回页面'),
-        ),
+      body: new Padding(
+        padding: new EdgeInsets.all(16.0),
+        child: new Text('${product.description}'),
       ),
     );
   }
