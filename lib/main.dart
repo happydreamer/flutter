@@ -13,7 +13,7 @@ class LayoutDemo extends StatelessWidget {
             gradient: new LinearGradient(
               begin: const FractionalOffset(0.5, 0.0), //起始偏移量
               end: const FractionalOffset(1.0, 1.0), //终止偏移量
-              //渐变颜色数据集
+              //渐变颜色数据集11111
               colors: <Color>[
                 Colors.red,
                 Colors.green,
