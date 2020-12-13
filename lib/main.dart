@@ -14,6 +14,7 @@ class LayoutDemo extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             //边框阴影效果
+            //1212121212121
             boxShadow: <BoxShadow>[
               new BoxShadow(
                 color: Colors.grey, //阴影颜色
